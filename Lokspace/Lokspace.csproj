@@ -46,6 +46,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GestionCuentasForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GestionCuentasForm.Designer.cs">
+      <DependentUpon>GestionCuentasForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GestionEspaciosForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GestionEspaciosForm.Designer.cs">
+      <DependentUpon>GestionEspaciosForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GestionReservasForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GestionReservasForm.Designer.cs">
+      <DependentUpon>GestionReservasForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Login.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -72,6 +90,15 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="GestionCuentasForm.resx">
+      <DependentUpon>GestionCuentasForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GestionEspaciosForm.resx">
+      <DependentUpon>GestionEspaciosForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GestionReservasForm.resx">
+      <DependentUpon>GestionReservasForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
