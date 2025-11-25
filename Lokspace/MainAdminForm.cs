@@ -21,15 +21,8 @@ namespace Lokspace
             this.usuario = usuario;
             InitializeComponent();
             MostrarDashboardInicial();
-            // ConfigurarInterfaz();
-        }
-
-        private void ConfigurarInterfaz()
-        {
             
         }
-
-       
 
         private void MostrarDashboardInicial()
         {
