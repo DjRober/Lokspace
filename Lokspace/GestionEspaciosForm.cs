@@ -9,7 +9,6 @@ namespace Lokspace
 {
     public partial class GestionEspaciosForm : Form
     {
-
         public class Space
         {
             public string Id { get; set; }
