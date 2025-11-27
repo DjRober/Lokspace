@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,11 +16,6 @@ namespace Lokspace
         public Login()
         {
             InitializeComponent();
-        }
-
-        private void Login_Load(object sender, EventArgs e)
-        {
-
         }
 
         // Atributos:
@@ -43,17 +39,17 @@ namespace Lokspace
         private void MostrarInterfazSegunRol(Usuario usuario)
         {
             Form form;
-            switch (usuario.Tipo)
+            switch (usuario.id_rol)
             {
-                case "admin":
+                case 1:
                     form = new MainAdminForm(usuario);
                     break;
 
-                case "docente":
+                case 2:
                     form = new MainDocenteForm(usuario);
                     break;
 
-                case "alumno":
+                case 3:
                     form = new MainAlumnoForm(usuario);
                     break;
 
@@ -67,33 +63,22 @@ namespace Lokspace
 
     }
 
-    // Modelo de Usuario base - temporal
-    public class Usuario
-    {
-        public int Id { get; set; }
-        public string Nombre { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
-        public string Tipo { get; set; } // "admin", "docente", "alumno"
-        public bool Activo { get; set; }
-    }
-
     // Servicio de autentificacion
     public class AuthService
     {
-        /* Usuario hardcodeados -
-         * A la mera hora sera a traves de consultas a la base de datos
-         */
-        private List<Usuario> usuariosHardcodeados = new List<Usuario>
-        {
-            new Usuario { Id = 1, Email = "admin@utcj.com", Password = "123456", Tipo = "admin", Nombre = "Admin", Activo = true},
-            new Usuario { Id = 2, Email = "docente@utcj.com", Password = "123456", Tipo = "docente", Nombre = "Docente", Activo = true},
-            new Usuario { Id = 3, Email = "alumno@utcj.com", Password = "123456", Tipo = "alumno", Nombre = "Alumno", Activo = true}
-        };
+        private UsuarioService usuarioService = new UsuarioService();
 
         public Usuario Login(string email, string password)
         {
-            return usuariosHardcodeados.FirstOrDefault(u => u.Email == email && u.Password == password && u.Activo);
+            // Validacion basica
+            if(string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
+            {
+                MessageBox.Show("Por favor, ingresa email y contraseña");
+                return null;
+            }
+
+            // Buscar usuario en la base de datos
+            return this.usuarioService.Login(email.Trim(), password);
         }
     }
 }
