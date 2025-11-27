@@ -9,6 +9,7 @@ using MySql.Data.MySqlClient;
 
 namespace Lokspace
 {
+
     internal class Database
     {
         private string connectionString = "server=localhost;database=Lokspace;uid=root;pwd=;";
