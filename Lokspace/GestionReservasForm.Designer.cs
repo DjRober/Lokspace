@@ -48,6 +48,7 @@
             this.Controls.Add(this.label1);
             this.Name = "GestionReservasForm";
             this.Text = "GestionReservasForm";
+            this.Load += new System.EventHandler(this.GestionReservasForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

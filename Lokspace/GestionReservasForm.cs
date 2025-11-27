@@ -16,5 +16,10 @@ namespace Lokspace
         {
             InitializeComponent();
         }
+
+        private void GestionReservasForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

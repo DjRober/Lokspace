@@ -61,6 +61,10 @@ namespace Lokspace
 
         }
 
+        private void Login_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 
     // Servicio de autentificacion

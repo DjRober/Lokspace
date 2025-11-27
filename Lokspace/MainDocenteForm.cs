@@ -23,5 +23,35 @@ namespace Lokspace
         {
 
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void btnReservas_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnEspacios_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnCalendario_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnNuevaReserva_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

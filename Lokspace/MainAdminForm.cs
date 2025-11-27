@@ -117,6 +117,9 @@ namespace Lokspace
 
         }
 
+        private void panelContenido_Paint(object sender, PaintEventArgs e)
+        {
 
+        }
     }
 }
