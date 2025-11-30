@@ -342,5 +342,10 @@ namespace Lokspace
                 return false;
             }
         }
+
+        private void GestionEspaciosForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

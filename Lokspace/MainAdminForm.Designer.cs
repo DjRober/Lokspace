@@ -49,6 +49,7 @@
             this.panelLateral.Name = "panelLateral";
             this.panelLateral.Size = new System.Drawing.Size(200, 631);
             this.panelLateral.TabIndex = 0;
+            this.panelLateral.Paint += new System.Windows.Forms.PaintEventHandler(this.panelLateral_Paint);
             // 
             // btnCerrarSesion
             // 

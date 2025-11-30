@@ -37,6 +37,7 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Name = "GestionEspaciosForm";
             this.Text = "GestionEspaciosForm";
+            this.Load += new System.EventHandler(this.GestionEspaciosForm_Load);
             this.ResumeLayout(false);
 
         }

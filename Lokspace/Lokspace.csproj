@@ -141,8 +141,26 @@
     <Compile Include="MainDocenteForm.Designer.cs">
       <DependentUpon>MainDocenteForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="NuevaReservaDocente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NuevaReservaDocente.Designer.cs">
+      <DependentUpon>NuevaReservaDocente.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReservasPersonalesDocente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReservasPersonalesDocente.Designer.cs">
+      <DependentUpon>ReservasPersonalesDocente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SolicitudesPendientesDocente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SolicitudesPendientesDocente.Designer.cs">
+      <DependentUpon>SolicitudesPendientesDocente.cs</DependentUpon>
+    </Compile>
     <Compile Include="Usuario.cs" />
     <Compile Include="UsuarioService.cs" />
     <EmbeddedResource Include="GestionCuentasForm.resx">
@@ -166,6 +184,9 @@
     <EmbeddedResource Include="MainDocenteForm.resx">
       <DependentUpon>MainDocenteForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="NuevaReservaDocente.resx">
+      <DependentUpon>NuevaReservaDocente.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -175,6 +196,12 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="ReservasPersonalesDocente.resx">
+      <DependentUpon>ReservasPersonalesDocente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SolicitudesPendientesDocente.resx">
+      <DependentUpon>SolicitudesPendientesDocente.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

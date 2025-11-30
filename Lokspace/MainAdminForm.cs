@@ -121,5 +121,10 @@ namespace Lokspace
         {
 
         }
+
+        private void panelLateral_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
