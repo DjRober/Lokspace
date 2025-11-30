@@ -346,7 +346,16 @@ namespace Lokspace
 
             if (MostrarEditorUsuario(nuevo))
             {
-                bindingList.Add(nuevo);
+                int nuevoId = usuarioService.RegistrarUsuario(nuevo);
+                if (nuevoId > 0)
+                {
+                    nuevo.id_usuario = nuevoId;
+                    bindingList.Add(nuevo);
+                }
+                else
+                {
+                    MessageBox.Show("Error al guardar el usuario en la base de datos");
+                }
             }
         }
 
@@ -354,8 +363,17 @@ namespace Lokspace
         {
             if (MostrarEditorUsuario(usuario))
             {
-                bindingSource.ResetBindings(false);
-                RenderCurrentView();
+                // Usar el servicio para actualizar en BD
+                bool exito = usuarioService.ActualizarUsuario(usuario);
+                if (exito)
+                {
+                    bindingSource.ResetBindings(false);
+                    RenderCurrentView();
+                }
+                else
+                {
+                    MessageBox.Show("Error al actualizar el usuario en la base de datos");
+                }
             }
         }
 
@@ -363,7 +381,16 @@ namespace Lokspace
         {
             if (MessageBox.Show($"¿Eliminar usuario {usuario.NombreCompleto}?", "Confirmar", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
-                bindingList.Remove(usuario);
+                // Usar el servicio para eliminar de BD
+                bool exito = usuarioService.EliminarUsuario(usuario.id_usuario);
+                if (exito)
+                {
+                    bindingList.Remove(usuario);
+                }
+                else
+                {
+                    MessageBox.Show("Error al eliminar el usuario de la base de datos");
+                }
             }
         }
 
