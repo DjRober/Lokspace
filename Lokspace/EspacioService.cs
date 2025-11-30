@@ -382,7 +382,7 @@ namespace Lokspace
                 using (MySqlConnection conn = db.GetConnection())
                 {
                     conn.Open();
-                    string query = @"UPDATE espacio 
+                    string query = @"UPDATE espacios 
                                     SET nombre_espacio = @nombre, 
                                         estado_espacio = @estado, 
                                         fecha_registro = @fecha, 
@@ -523,7 +523,7 @@ namespace Lokspace
                 using (MySqlConnection conn = db.GetConnection())
                 {
                     conn.Open();
-                    string query = "UPDATE espacio SET estado_espacio = @estado WHERE id_espacio = @id";
+                    string query = "UPDATE espacios SET estado_espacio = @estado WHERE id_espacio = @id";
                     MySqlCommand cmd = new MySqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@estado", nuevoEstado);
                     cmd.Parameters.AddWithValue("@id", idEspacio);
