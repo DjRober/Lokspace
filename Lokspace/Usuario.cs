@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Lokspace
 {
-    public class Usuario
+    public partial class Usuario
     {
         public int id_usuario { get; set; }
         public string nombre1_usuario { get; set; }

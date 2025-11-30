@@ -37,7 +37,6 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Name = "GestionCuentasForm";
             this.Text = "GestionCuentasForm";
-            this.Load += new System.EventHandler(this.GestionCuentasForm_Load);
             this.ResumeLayout(false);
 
         }
