@@ -97,6 +97,8 @@
   <ItemGroup>
     <Compile Include="Database.cs" />
     <Compile Include="Espacio.cs" />
+    <Compile Include="EspacioHijo.cs" />
+    <Compile Include="EspacioPadre.cs" />
     <Compile Include="EspacioService.cs" />
     <Compile Include="EspaciosUserControles.cs">
       <SubType>UserControl</SubType>

@@ -9,31 +9,15 @@ namespace Lokspace
 {
     public partial class GestionEspaciosForm : Form
     {
-        public class Space
-        {
-            public string Id { get; set; }
-            public string Name { get; set; }
-            public string Type { get; set; }
-            public string Description { get; set; }
-            public int Capacity { get; set; }
-            public string Features { get; set; }
-            public string ParentId { get; set; }
-            public int? Floor { get; set; }
-
-            public string TipoDisplay => Type == "building" ? "🏢 Edificio" :
-                                       Type == "classroom" ? "🏫 Aula" :
-                                       Type == "sports" ? "⚽ Deportivo" : "❓ Desconocido";
-            public string CapacidadDisplay => Capacity > 0 ? $"{Capacity} personas" : "N/A";
-        }
-
-        private List<Space> espacios;
-        private BindingList<Space> bindingList;
+        private List<EspacioPadre> espaciosPadre;
+        private BindingList<EspacioPadre> bindingList;
         private BindingSource bindingSource;
         private DataGridView dgvEspacios;
         private Panel panelContenidoInterno;
         private FlowLayoutPanel flowCards;
         private bool usingCards = false;
         private Panel panelEstadisticas;
+        private EspacioService espacioService = new EspacioService();
 
         public GestionEspaciosForm()
         {
@@ -46,19 +30,13 @@ namespace Lokspace
 
         private void InicializarDatos()
         {
-            espacios = new List<Space>
-            {
-                new Space { Id = "1", Name = "Edificio Central", Type = "building", Description = "Edificio principal", Capacity = 1000 },
-                new Space { Id = "2", Name = "Aula 101", Type = "classroom", ParentId = "1", Floor = 1, Capacity = 40 },
-                new Space { Id = "3", Name = "Aula 201", Type = "classroom", ParentId = "1", Floor = 2, Capacity = 35 },
-                new Space { Id = "4", Name = "Cancha de Fútbol", Type = "sports", Capacity = 200 },
-                new Space { Id = "5", Name = "Edificio de Deportes", Type = "building" },
-                new Space { Id = "6", Name = "Gimnasio Principal", Type = "sports", ParentId = "5", Capacity = 100 }
-            };
+            // Usar el servicio para obtener datos reales de la base de datos
+            espaciosPadre = espacioService.ObtenerTodosTiposEspacios();
         }
 
         private void ConfigurarInterfaz()
         {
+            this.Text = "Gestión de Tipos de Espacios";
             this.Size = new Size(1000, 650);
             this.StartPosition = FormStartPosition.CenterScreen;
             this.Padding = new Padding(12);
@@ -81,7 +59,7 @@ namespace Lokspace
 
             var title = new Label
             {
-                Text = "Administrador de Espacios Universitarios",
+                Text = "Gestión de Tipos de Espacios",
                 Font = new Font("Segoe UI", 18, FontStyle.Bold),
                 Location = new Point(6, 10),
                 AutoSize = true
@@ -89,14 +67,14 @@ namespace Lokspace
 
             var btnAgregar = new Button
             {
-                Text = "➕ Agregar Espacio",
+                Text = "➕ Agregar Tipo",
                 Size = new Size(160, 36),
                 Location = new Point(820, 28),
                 BackColor = Color.FromArgb(59, 130, 246),
                 ForeColor = Color.White,
                 FlatStyle = FlatStyle.Flat
             };
-            btnAgregar.Click += (s, e) => AgregarEspacio();
+            btnAgregar.Click += (s, e) => AgregarEspacioPadre();
 
             var btnToggleView = new Button
             {
@@ -153,39 +131,33 @@ namespace Lokspace
         {
             dgvEspacios.Columns.Add(new DataGridViewTextBoxColumn
             {
-                Name = "Name",
-                HeaderText = "Nombre",
-                DataPropertyName = "Name"
+                Name = "id_tipo_espacio",
+                HeaderText = "ID",
+                DataPropertyName = "id_tipo_espacio",
+                Width = 60
             });
 
             dgvEspacios.Columns.Add(new DataGridViewTextBoxColumn
             {
-                Name = "TipoDisplay",
-                HeaderText = "Tipo",
-                DataPropertyName = "TipoDisplay",
-                Width = 120
+                Name = "nombre_tipo",
+                HeaderText = "Nombre del Tipo",
+                DataPropertyName = "nombre_tipo"
             });
 
-            dgvEspacios.Columns.Add(new DataGridViewTextBoxColumn
+            dgvEspacios.Columns.Add(new DataGridViewButtonColumn
             {
-                Name = "CapacidadDisplay",
-                HeaderText = "Capacidad",
-                DataPropertyName = "CapacidadDisplay",
-                Width = 110
-            });
-
-            dgvEspacios.Columns.Add(new DataGridViewTextBoxColumn
-            {
-                Name = "Description",
-                HeaderText = "Descripción",
-                DataPropertyName = "Description"
+                Name = "Visualizar",
+                HeaderText = "",
+                Text = "👁️ Visualizar",
+                UseColumnTextForButtonValue = true,
+                Width = 100
             });
 
             dgvEspacios.Columns.Add(new DataGridViewButtonColumn
             {
                 Name = "Editar",
                 HeaderText = "",
-                Text = "Editar",
+                Text = "✏️ Editar",
                 UseColumnTextForButtonValue = true,
                 Width = 80
             });
@@ -194,7 +166,7 @@ namespace Lokspace
             {
                 Name = "Eliminar",
                 HeaderText = "",
-                Text = "Eliminar",
+                Text = "🗑️ Eliminar",
                 UseColumnTextForButtonValue = true,
                 Width = 80
             });
@@ -231,19 +203,19 @@ namespace Lokspace
             flowCards.SuspendLayout();
             flowCards.Controls.Clear();
 
-            foreach (var espacio in bindingList)
+            foreach (var espacioPadre in bindingList)
             {
-                flowCards.Controls.Add(CrearCard(espacio));
+                flowCards.Controls.Add(CrearCard(espacioPadre));
             }
 
             flowCards.ResumeLayout();
         }
 
-        private Panel CrearCard(Space espacio)
+        private Panel CrearCard(EspacioPadre espacioPadre)
         {
             var card = new Panel
             {
-                Size = new Size(260, 140),
+                Size = new Size(280, 140),
                 Margin = new Padding(8),
                 BackColor = Color.FromArgb(250, 250, 250),
                 BorderStyle = BorderStyle.FixedSingle
@@ -251,7 +223,7 @@ namespace Lokspace
 
             card.Controls.Add(new Label
             {
-                Text = espacio.Name,
+                Text = espacioPadre.nombre_tipo,
                 Font = new Font("Segoe UI", 10, FontStyle.Bold),
                 Location = new Point(10, 10),
                 Size = new Size(180, 20)
@@ -259,44 +231,39 @@ namespace Lokspace
 
             card.Controls.Add(new Label
             {
-                Text = espacio.TipoDisplay,
+                Text = $"ID: {espacioPadre.id_tipo_espacio}",
                 Location = new Point(10, 36),
                 AutoSize = true
             });
 
-            card.Controls.Add(new Label
+            var btnVisualizar = new Button
             {
-                Text = espacio.CapacidadDisplay,
-                Location = new Point(10, 56),
-                AutoSize = true
-            });
-
-            card.Controls.Add(new Label
-            {
-                Text = espacio.Description ?? "",
-                Location = new Point(10, 76),
-                Size = new Size(180, 40),
-                AutoEllipsis = true
-            });
+                Text = "👁️ Visualizar",
+                Size = new Size(80, 26),
+                Location = new Point(10, 70),
+                Tag = espacioPadre
+            };
+            btnVisualizar.Click += (s, e) => VisualizarEspaciosHijos((EspacioPadre)((Button)s).Tag);
 
             var btnEditar = new Button
             {
-                Text = "Editar",
-                Size = new Size(60, 26),
-                Location = new Point(200, 10),
-                Tag = espacio
+                Text = "✏️ Editar",
+                Size = new Size(80, 26),
+                Location = new Point(100, 70),
+                Tag = espacioPadre
             };
-            btnEditar.Click += (s, e) => EditarEspacio((Space)((Button)s).Tag);
+            btnEditar.Click += (s, e) => EditarEspacioPadre((EspacioPadre)((Button)s).Tag);
 
             var btnEliminar = new Button
             {
-                Text = "Eliminar",
-                Size = new Size(60, 26),
-                Location = new Point(200, 42),
-                Tag = espacio
+                Text = "🗑️ Eliminar",
+                Size = new Size(80, 26),
+                Location = new Point(190, 70),
+                Tag = espacioPadre
             };
-            btnEliminar.Click += (s, e) => EliminarEspacio((Space)((Button)s).Tag);
+            btnEliminar.Click += (s, e) => EliminarEspacioPadre((EspacioPadre)((Button)s).Tag);
 
+            card.Controls.Add(btnVisualizar);
             card.Controls.Add(btnEditar);
             card.Controls.Add(btnEliminar);
 
@@ -307,15 +274,11 @@ namespace Lokspace
         {
             panelEstadisticas.Controls.Clear();
 
-            // CORRECCIÓN: Usar la lista correcta según el contexto
-            var datos = bindingList != null ? bindingList : espacios.AsEnumerable();
+            var datos = bindingList != null ? bindingList : espaciosPadre.AsEnumerable();
 
             var stats = new[]
             {
-                ("Total Espacios", datos.Count()),
-                ("Edificios", datos.Count(s => s.Type == "building")),
-                ("Aulas", datos.Count(s => s.Type == "classroom")),
-                ("Espacios Deportivos", datos.Count(s => s.Type == "sports"))
+                ("Total Tipos de Espacios", datos.Count())
             };
 
             int x = 6;
@@ -357,53 +320,88 @@ namespace Lokspace
             return card;
         }
 
-        private void AgregarEspacio()
+        private void AgregarEspacioPadre()
         {
-            var nuevo = new Space
+            var nuevo = new EspacioPadre
             {
-                Id = Guid.NewGuid().ToString(),
-                Name = "Nuevo espacio",
-                Type = "classroom",
-                Capacity = 0
+                nombre_tipo = "Nuevo tipo de espacio"
             };
 
-            if (MostrarEditor(nuevo))
+            if (MostrarEditorEspacioPadre(nuevo))
             {
-                bindingList.Add(nuevo);
+                int nuevoId = espacioService.AgregarTipoEspacio(nuevo);
+                if (nuevoId > 0)
+                {
+                    nuevo.id_tipo_espacio = nuevoId;
+                    bindingList.Add(nuevo);
+                }
+                else
+                {
+                    MessageBox.Show("Error al agregar el tipo de espacio");
+                }
             }
         }
 
-        private void EditarEspacio(Space espacio)
+        private void EditarEspacioPadre(EspacioPadre espacioPadre)
         {
-            if (MostrarEditor(espacio))
+            if (MostrarEditorEspacioPadre(espacioPadre))
             {
-                bindingSource.ResetBindings(false);
-                RenderCurrentView();
+                bool exito = espacioService.ActualizarTipoEspacio(espacioPadre);
+                if (exito)
+                {
+                    bindingSource.ResetBindings(false);
+                    RenderCurrentView();
+                }
+                else
+                {
+                    MessageBox.Show("Error al actualizar el tipo de espacio");
+                }
             }
         }
 
-        private void EliminarEspacio(Space espacio)
+        private void EliminarEspacioPadre(EspacioPadre espacioPadre)
         {
-            if (MessageBox.Show($"¿Eliminar {espacio.Name}?", "Confirmar", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            if (MessageBox.Show($"¿Eliminar el tipo de espacio '{espacioPadre.nombre_tipo}'?",
+                "Confirmar", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
-                bindingList.Remove(espacio);
+                bool exito = espacioService.EliminarTipoEspacio(espacioPadre.id_tipo_espacio);
+                if (exito)
+                {
+                    bindingList.Remove(espacioPadre);
+                }
+                else
+                {
+                    MessageBox.Show("Error al eliminar el tipo de espacio");
+                }
             }
+        }
+
+        private void VisualizarEspaciosHijos(EspacioPadre espacioPadre)
+        {
+            // Pendiente: Abrir formulario MostrarEspaciosHijos
+            MessageBox.Show($"Visualizar espacios hijos para: {espacioPadre.nombre_tipo}\n\n" +
+                          $"Esta función abrirá el formulario MostrarEspaciosHijos con ID: {espacioPadre.id_tipo_espacio}",
+                          "Función Pendiente", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void ManejarClickCelda(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0 || e.RowIndex >= bindingList.Count) return;
 
-            var espacio = bindingList[e.RowIndex];
+            var espacioPadre = bindingList[e.RowIndex];
             var colName = dgvEspacios.Columns[e.ColumnIndex].Name;
 
-            if (colName == "Editar")
+            if (colName == "Visualizar")
             {
-                EditarEspacio(espacio);
+                VisualizarEspaciosHijos(espacioPadre);
+            }
+            else if (colName == "Editar")
+            {
+                EditarEspacioPadre(espacioPadre);
             }
             else if (colName == "Eliminar")
             {
-                EliminarEspacio(espacio);
+                EliminarEspacioPadre(espacioPadre);
             }
         }
 
@@ -411,7 +409,7 @@ namespace Lokspace
         {
             if (bindingSource != null) return;
 
-            bindingList = new BindingList<Space>(espacios);
+            bindingList = new BindingList<EspacioPadre>(espaciosPadre);
             bindingSource = new BindingSource { DataSource = bindingList };
             dgvEspacios.DataSource = bindingSource;
 
@@ -419,60 +417,37 @@ namespace Lokspace
             RenderCurrentView();
         }
 
-        private bool MostrarEditor(Space espacio)
+        private bool MostrarEditorEspacioPadre(EspacioPadre espacioPadre)
         {
             using (var form = new Form())
             {
-                form.Text = "Editar espacio";
+                form.Text = espacioPadre.id_tipo_espacio == 0 ? "Agregar Tipo de Espacio" : "Editar Tipo de Espacio";
                 form.FormBorderStyle = FormBorderStyle.FixedDialog;
                 form.StartPosition = FormStartPosition.CenterParent;
-                form.Size = new Size(460, 360);
+                form.Size = new Size(400, 150);
                 form.MaximizeBox = form.MinimizeBox = false;
 
-                var controles = new[]
-                {
-                    CrearControlEditor("Nombre:", new TextBox { Text = espacio.Name, Width = 320 }, 10),
-                    CrearControlEditor("Tipo:", CrearComboTipo(espacio.Type), 50),
-                    CrearControlEditor("Capacidad:", new NumericUpDown { Value = Math.Max(0, espacio.Capacity), Width = 120 }, 90),
-                    CrearControlEditor("Descripción:", new TextBox { Text = espacio.Description, Multiline = true, Height = 100, ScrollBars = ScrollBars.Vertical, Width = 320 }, 130)
-                };
+                var lblNombre = new Label { Text = "Nombre del tipo:", Location = new Point(10, 20), AutoSize = true };
+                var txtNombre = new TextBox { Text = espacioPadre.nombre_tipo, Location = new Point(120, 16), Width = 250 };
 
-                var btnOk = new Button { Text = "Guardar", DialogResult = DialogResult.OK, Location = new Point(240, 250), Size = new Size(90, 30) };
-                var btnCancel = new Button { Text = "Cancelar", DialogResult = DialogResult.Cancel, Location = new Point(340, 250), Size = new Size(90, 30) };
+                var btnOk = new Button { Text = "Guardar", DialogResult = DialogResult.OK, Location = new Point(200, 60), Size = new Size(90, 30) };
+                var btnCancel = new Button { Text = "Cancelar", DialogResult = DialogResult.Cancel, Location = new Point(300, 60), Size = new Size(90, 30) };
 
-                form.AcceptButton = btnOk;
-                form.CancelButton = btnCancel;
-                form.Controls.AddRange(controles);
+                form.Controls.Add(lblNombre);
+                form.Controls.Add(txtNombre);
                 form.Controls.Add(btnOk);
                 form.Controls.Add(btnCancel);
 
+                form.AcceptButton = btnOk;
+                form.CancelButton = btnCancel;
+
                 if (form.ShowDialog(this) == DialogResult.OK)
                 {
-                    espacio.Name = ((TextBox)controles[0].Controls[1]).Text.Trim();
-                    espacio.Type = ((ComboBox)controles[1].Controls[1]).SelectedItem?.ToString() ?? "classroom";
-                    espacio.Capacity = (int)((NumericUpDown)controles[2].Controls[1]).Value;
-                    espacio.Description = ((TextBox)controles[3].Controls[1]).Text.Trim();
+                    espacioPadre.nombre_tipo = txtNombre.Text.Trim();
                     return true;
                 }
                 return false;
             }
-        }
-
-        private Panel CrearControlEditor(string label, Control control, int y)
-        {
-            var panel = new Panel { Location = new Point(10, y), Size = new Size(430, 30) };
-            panel.Controls.Add(new Label { Text = label, AutoSize = true, Location = new Point(0, 5) });
-            panel.Controls.Add(control);
-            control.Location = new Point(100, 0);
-            return panel;
-        }
-
-        private ComboBox CrearComboTipo(string tipoActual)
-        {
-            var combo = new ComboBox { Width = 200, DropDownStyle = ComboBoxStyle.DropDownList };
-            combo.Items.AddRange(new[] { "building", "classroom", "sports" });
-            combo.SelectedItem = tipoActual ?? "classroom";
-            return combo;
         }
     }
 }
