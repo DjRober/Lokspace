@@ -96,7 +96,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Database.cs" />
-    <Compile Include="EspaciosUserControl.cs">
+    <Compile Include="Espacio.cs" />
+    <Compile Include="EspacioService.cs" />
+    <Compile Include="EspaciosUserControles.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="GestionCuentasForm.cs">
