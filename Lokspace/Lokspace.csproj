@@ -145,6 +145,12 @@
     <Compile Include="MainDocenteForm.Designer.cs">
       <DependentUpon>MainDocenteForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="MostrarEspaciosHijos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MostrarEspaciosHijos.Designer.cs">
+      <DependentUpon>MostrarEspaciosHijos.cs</DependentUpon>
+    </Compile>
     <Compile Include="NuevaReservaDocente.cs">
       <SubType>Form</SubType>
     </Compile>

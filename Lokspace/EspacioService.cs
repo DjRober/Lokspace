@@ -324,7 +324,7 @@ namespace Lokspace
                             {
                                 id_espacio = reader.GetInt32("id_espacio"),
                                 nombre_espacio = reader.GetString("nombre_espacio"),
-                                estado_espacio = reader.GetBoolean("estado_espacio"),
+                                estado_espacio = reader.GetString("estado_espacio"),
                                 fecha_registro = reader.GetDateTime("fecha_registro"),
                                 capacidad = reader.GetInt32("capacidad"),
                                 id_tipo_espacio = reader.GetInt32("id_tipo_espacio"),
@@ -351,7 +351,7 @@ namespace Lokspace
                 using (MySqlConnection conn = db.GetConnection())
                 {
                     conn.Open();
-                    string query = @"INSERT INTO espacio 
+                    string query = @"INSERT INTO espacios 
                                     (nombre_espacio, estado_espacio, fecha_registro, capacidad, id_tipo_espacio) 
                                     VALUES (@nombre, @estado, @fecha, @capacidad, @id_tipo);
                                     SELECT LAST_INSERT_ID();";
@@ -458,7 +458,7 @@ namespace Lokspace
                             {
                                 id_espacio = reader.GetInt32("id_espacio"),
                                 nombre_espacio = reader.GetString("nombre_espacio"),
-                                estado_espacio = reader.GetBoolean("estado_espacio"),
+                                estado_espacio = reader.GetString("estado_espacio"),
                                 fecha_registro = reader.GetDateTime("fecha_registro"),
                                 capacidad = reader.GetInt32("capacidad"),
                                 id_tipo_espacio = reader.GetInt32("id_tipo_espacio"),
@@ -498,7 +498,7 @@ namespace Lokspace
                             {
                                 id_espacio = reader.GetInt32("id_espacio"),
                                 nombre_espacio = reader.GetString("nombre_espacio"),
-                                estado_espacio = reader.GetBoolean("estado_espacio"),
+                                estado_espacio = reader.GetString("estado_espacio"),
                                 fecha_registro = reader.GetDateTime("fecha_registro"),
                                 capacidad = reader.GetInt32("capacidad"),
                                 id_tipo_espacio = reader.GetInt32("id_tipo_espacio"),
