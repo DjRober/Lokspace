@@ -21,6 +21,7 @@ namespace Lokspace
         private ReservaService reservaService = new ReservaService();
         private UsuarioService usuarioService = new UsuarioService();
         private EspacioService espacioService = new EspacioService();
+        private Usuario usuarioActual;
 
         // Filtros
         private ComboBox cmbFiltroEstado;
@@ -28,8 +29,9 @@ namespace Lokspace
         private DateTimePicker dtpFiltroFecha;
         private CheckBox chkFiltroFecha;
 
-        public GestionReservasForm()
+        public GestionReservasForm(Usuario usuario)
         {
+            this.usuarioActual = usuario;
             InicializarDatos();
             ConfigurarInterfaz();
             ConfigurarDataGridView();
@@ -578,7 +580,8 @@ namespace Lokspace
                 proposito = "Nueva reserva",
                 fecha_solicitud = DateTime.Now,
                 id_estado_reserva = 3, // Pendiente por defecto
-                id_gestor = 0 // Se asignará al guardar si es necesario
+                id_gestor = usuarioActual.id_usuario,
+                id_usuario = usuarioActual.id_usuario
             };
 
             if (MostrarEditorReserva(nueva))

@@ -100,7 +100,7 @@ namespace Lokspace
 
         private void btnGestionReservas_Click(object sender, EventArgs e)
         {
-            MostrarFormularioEnPanel(new GestionReservasForm());
+            MostrarFormularioEnPanel(new GestionReservasForm(usuario));
             ResaltarBotonActivo((Button)sender);
         }
 

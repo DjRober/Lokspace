@@ -96,7 +96,7 @@
             this.panelContenido.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelContenido.Location = new System.Drawing.Point(200, 0);
             this.panelContenido.Name = "panelContenido";
-            this.panelContenido.Size = new System.Drawing.Size(1493, 631);
+            this.panelContenido.Size = new System.Drawing.Size(1724, 631);
             this.panelContenido.TabIndex = 0;
             this.panelContenido.Paint += new System.Windows.Forms.PaintEventHandler(this.panelContenido_Paint);
             // 
@@ -105,10 +105,11 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(1693, 631);
+            this.ClientSize = new System.Drawing.Size(1924, 631);
             this.Controls.Add(this.panelContenido);
             this.Controls.Add(this.panelLateral);
             this.Name = "MainAdminForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MainAdminForm";
             this.Load += new System.EventHandler(this.MainAdminForm_Load);
             this.panelLateral.ResumeLayout(false);
