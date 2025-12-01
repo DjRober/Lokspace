@@ -61,7 +61,8 @@ namespace Lokspace
                             reserva.fecha_solicitud = reader.GetDateTime("fecha_solicitud");
                             reserva.id_espacio = reader.GetInt32("id_espacio");
                             reserva.id_usuario = reader.GetInt32("id_usuario");
-                            reserva.id_gestor = reader.GetInt32("id_gestor");
+                            if (!reader.IsDBNull(reader.GetOrdinal("id_gestor")))
+                                reserva.id_gestor = reader.GetInt32("id_gestor");
                             reserva.id_estado_reserva = reader.GetInt32("id_estado_reserva");
 
                             // Información relacionada
