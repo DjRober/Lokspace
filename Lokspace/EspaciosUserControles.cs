@@ -14,9 +14,12 @@ namespace Lokspace
         private FlowLayoutPanel flowLayoutPanel;
         private Label lblTitulo;
         private EspacioService espacioService = new EspacioService();
+        private int idUsuarioActual;
 
-        public EspaciosUserControles()
+        public EspaciosUserControles(int idUsuario)
         {
+            idUsuarioActual = idUsuario;
+
             InitializeComponent();
             InicializarComponentesAdicionales();
             CargarEspaciosDesdeBD();
@@ -185,6 +188,48 @@ namespace Lokspace
             card.Controls.Add(lblTipo);
             card.Controls.Add(lblCapacidad);
             card.Controls.Add(lblDescripcion);
+
+            // SI EL ESPACIO ESTÁ DISPONIBLE, AGREGAR BOTÓN RESERVAR
+            if (espacio.EstadoEspacio.ToLower() == "disponible")
+            {
+                Button btnReservar = new Button()
+                {
+                    Text = "Reservar",
+                    BackColor = Color.FromArgb(46, 204, 113),
+                    ForeColor = Color.White,
+                    FlatStyle = FlatStyle.Flat,
+                    Width = 120,
+                    Height = 30,
+                    Cursor = Cursors.Hand,
+                    Location = new Point(65, card.Height - 45)
+                };
+
+                btnReservar.FlatAppearance.BorderSize = 0;
+
+                btnReservar.Click += (s, e) =>
+                {
+                    FormReservaAlumno f = new FormReservaAlumno(espacio.IdEspacio);
+                    f.IdUsuarioActual = idUsuarioActual;
+                    f.ShowDialog();
+                };
+
+                card.Controls.Add(btnReservar);
+            }
+            else
+            {
+                Label lblOcupado = new Label()
+                {
+                    Text = "Ocupado",
+                    ForeColor = Color.Red,
+                    Font = new Font("Segoe UI", 10, FontStyle.Bold),
+                    AutoSize = true,
+                    Location = new Point(85, card.Height - 40)
+                };
+
+                card.Controls.Add(lblOcupado);
+            }
+
+
 
             return card;
         }

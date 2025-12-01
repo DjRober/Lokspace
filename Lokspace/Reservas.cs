@@ -12,7 +12,8 @@ namespace Lokspace
         public DateTime fecha_solicitud { get; set; }
         public int id_espacio { get; set; }
         public int id_usuario { get; set; }
-        public int id_gestor { get; set; }
+        public int? id_gestor { get; set; }
+
         public int id_estado_reserva { get; set; }
 
         // Propiedades de navegación (para mostrar información relacionada)

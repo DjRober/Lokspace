@@ -48,6 +48,7 @@
             this.BtnCerrarSesion.TabIndex = 1;
             this.BtnCerrarSesion.Text = "cerrar sesion";
             this.BtnCerrarSesion.UseVisualStyleBackColor = true;
+            this.BtnCerrarSesion.Click += new System.EventHandler(this.BtnCerrarSesion_Click);
             // 
             // MainAlumnoForm
             // 
@@ -56,7 +57,7 @@
             this.ClientSize = new System.Drawing.Size(917, 483);
             this.Controls.Add(this.BtnCerrarSesion);
             this.Controls.Add(this.panel1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "MainAlumnoForm";
             this.Text = "MainAlumnoForm";
             this.Load += new System.EventHandler(this.MainAlumnoForm_Load);

@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Windows.Forms;
 
 namespace Lokspace
@@ -113,7 +114,11 @@ namespace Lokspace
                     cmd.Parameters.AddWithValue("@fechaSolicitud", reserva.fecha_solicitud);
                     cmd.Parameters.AddWithValue("@idEspacio", reserva.id_espacio);
                     cmd.Parameters.AddWithValue("@idUsuario", reserva.id_usuario);
-                    cmd.Parameters.AddWithValue("@idGestor", reserva.id_gestor);
+
+                    cmd.Parameters.AddWithValue("@idGestor",
+    (object)reserva.id_gestor ?? DBNull.Value);
+
+
                     cmd.Parameters.AddWithValue("@idEstado", reserva.id_estado_reserva);
 
                     int nuevoId = Convert.ToInt32(cmd.ExecuteScalar());
@@ -306,7 +311,12 @@ namespace Lokspace
                                 reserva.fecha_solicitud = reader.GetDateTime("fecha_solicitud");
                                 reserva.id_espacio = reader.GetInt32("id_espacio");
                                 reserva.id_usuario = reader.GetInt32("id_usuario");
-                                reserva.id_gestor = reader.GetInt32("id_gestor");
+
+                                reserva.id_gestor = reader.IsDBNull(reader.GetOrdinal("id_gestor"))
+    ? (int?)null
+    : reader.GetInt32("id_gestor");
+
+
                                 reserva.id_estado_reserva = reader.GetInt32("id_estado_reserva");
 
                                 if (!reader.IsDBNull(reader.GetOrdinal("nombre_espacio")))

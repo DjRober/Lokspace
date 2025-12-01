@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -22,6 +23,16 @@ namespace Lokspace
             MostrarEspaciosEnPanel(); // Mostrar espacios reales al iniciar
         }
 
+        private void MostrarEspaciosEnPanel()
+        {
+            panel1.Controls.Clear();
+
+            var espaciosUC = new EspaciosUserControles(usuario.id_usuario);
+            espaciosUC.Dock = DockStyle.Fill;
+
+            panel1.Controls.Add(espaciosUC);
+        }
+
         private void MainAlumnoForm_Load(object sender, EventArgs e)
         {
             // El contenido ya se carga en el constructor
@@ -29,10 +40,20 @@ namespace Lokspace
 
         private void button1_Click(object sender, EventArgs e)
         {
+
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+            // Método del evento paint del panel
+        }
+
+        private void BtnCerrarSesion_Click(object sender, EventArgs e)
+        {
             var result = MessageBox.Show("¿Estás seguro de que deseas cerrar sesión?",
-                                       "Confirmar cierre de sesión",
-                                       MessageBoxButtons.YesNo,
-                                       MessageBoxIcon.Question);
+                           "Confirmar cierre de sesión",
+                           MessageBoxButtons.YesNo,
+                           MessageBoxIcon.Question);
 
             if (result == DialogResult.Yes)
             {
@@ -40,23 +61,6 @@ namespace Lokspace
                 var loginForm = new Login();
                 loginForm.Show();
             }
-        }
-
-        private void MostrarEspaciosEnPanel()
-        {
-            // Limpiar el panel
-            panel1.Controls.Clear();
-
-            // Crear y agregar el UserControl de espacios (que ahora usa datos reales)
-            var espaciosUC = new EspaciosUserControles();
-            espaciosUC.Dock = DockStyle.Fill;
-
-            panel1.Controls.Add(espaciosUC);
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-            // Método del evento paint del panel
         }
     }
 }
