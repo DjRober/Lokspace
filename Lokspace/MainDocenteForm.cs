@@ -18,8 +18,9 @@ namespace Lokspace
 
         public MainDocenteForm(Usuario usuario)
         {
-            this.usuario = usuario;
+            
             InitializeComponent();
+            this.usuario = usuario;
         }
 
 
@@ -58,8 +59,8 @@ namespace Lokspace
 
         private void MainDocenteForm_Load(object sender, EventArgs e)
         {
-            //Muestra la vista de Reservas del Docente al iniciar
-            MostrarFormularioEnPanel(new ReservasPersonalesDocente());
+            //Muestra la vista de Reservas del Docente al iniciar pasandole el objeto usuario
+            MostrarFormularioEnPanel(new ReservasPersonalesDocente(this.usuario));
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -74,7 +75,7 @@ namespace Lokspace
 
         private void btnReservas_Click(object sender, EventArgs e)
         {
-            MostrarFormularioEnPanel(new ReservasPersonalesDocente());
+            MostrarFormularioEnPanel(new ReservasPersonalesDocente(this.usuario));
         }
 
         private void btnEspacios_Click(object sender, EventArgs e)

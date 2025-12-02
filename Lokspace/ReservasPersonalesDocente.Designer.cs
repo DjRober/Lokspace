@@ -32,6 +32,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.btnNuevaReserva = new System.Windows.Forms.Button();
             this.listaReservasDocente = new System.Windows.Forms.DataGridView();
+            this.btnCancelarReserva = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.listaReservasDocente)).BeginInit();
             this.SuspendLayout();
             // 
@@ -64,7 +65,7 @@
             this.btnNuevaReserva.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.btnNuevaReserva.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.btnNuevaReserva.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnNuevaReserva.Location = new System.Drawing.Point(679, 57);
+            this.btnNuevaReserva.Location = new System.Drawing.Point(852, 45);
             this.btnNuevaReserva.Name = "btnNuevaReserva";
             this.btnNuevaReserva.Size = new System.Drawing.Size(166, 49);
             this.btnNuevaReserva.TabIndex = 11;
@@ -76,19 +77,33 @@
             // 
             this.listaReservasDocente.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.listaReservasDocente.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.listaReservasDocente.Location = new System.Drawing.Point(37, 155);
+            this.listaReservasDocente.Location = new System.Drawing.Point(37, 151);
             this.listaReservasDocente.Name = "listaReservasDocente";
             this.listaReservasDocente.RowHeadersWidth = 51;
             this.listaReservasDocente.RowTemplate.Height = 24;
-            this.listaReservasDocente.Size = new System.Drawing.Size(808, 301);
+            this.listaReservasDocente.Size = new System.Drawing.Size(981, 287);
             this.listaReservasDocente.TabIndex = 12;
             this.listaReservasDocente.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.listaReservasDocente_CellContentClick);
+            // 
+            // btnCancelarReserva
+            // 
+            this.btnCancelarReserva.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnCancelarReserva.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.btnCancelarReserva.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnCancelarReserva.Location = new System.Drawing.Point(852, 464);
+            this.btnCancelarReserva.Name = "btnCancelarReserva";
+            this.btnCancelarReserva.Size = new System.Drawing.Size(166, 49);
+            this.btnCancelarReserva.TabIndex = 13;
+            this.btnCancelarReserva.Text = "Cancelar Reserva";
+            this.btnCancelarReserva.UseVisualStyleBackColor = false;
+            this.btnCancelarReserva.Click += new System.EventHandler(this.btnCancelarReserva_Click);
             // 
             // ReservasPersonalesDocente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(900, 487);
+            this.ClientSize = new System.Drawing.Size(1138, 558);
+            this.Controls.Add(this.btnCancelarReserva);
             this.Controls.Add(this.listaReservasDocente);
             this.Controls.Add(this.btnNuevaReserva);
             this.Controls.Add(this.label6);
@@ -108,5 +123,6 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button btnNuevaReserva;
         private System.Windows.Forms.DataGridView listaReservasDocente;
+        private System.Windows.Forms.Button btnCancelarReserva;
     }
 }
