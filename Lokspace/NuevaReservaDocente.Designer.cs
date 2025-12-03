@@ -96,7 +96,7 @@
             // btnNuvaReserva
             // 
             this.btnNuvaReserva.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.btnNuvaReserva.Location = new System.Drawing.Point(507, 384);
+            this.btnNuvaReserva.Location = new System.Drawing.Point(355, 386);
             this.btnNuvaReserva.Name = "btnNuvaReserva";
             this.btnNuvaReserva.Size = new System.Drawing.Size(138, 46);
             this.btnNuvaReserva.TabIndex = 9;
@@ -107,7 +107,7 @@
             // btnCancelar
             // 
             this.btnCancelar.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.btnCancelar.Location = new System.Drawing.Point(327, 384);
+            this.btnCancelar.Location = new System.Drawing.Point(542, 386);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(138, 46);
             this.btnCancelar.TabIndex = 10;
@@ -134,7 +134,6 @@
             this.txtCampoProposito.Name = "txtCampoProposito";
             this.txtCampoProposito.Size = new System.Drawing.Size(510, 57);
             this.txtCampoProposito.TabIndex = 16;
-            this.txtCampoProposito.Text = "Descripcion breve del proposito de la reserva";
             this.txtCampoProposito.TextChanged += new System.EventHandler(this.txtCampoProposito_TextChanged);
             // 
             // cmbEspacio
@@ -157,6 +156,7 @@
             // 
             // dtpHoraInicio
             // 
+            this.dtpHoraInicio.CustomFormat = "hh:mm tt";
             this.dtpHoraInicio.Location = new System.Drawing.Point(457, 111);
             this.dtpHoraInicio.Name = "dtpHoraInicio";
             this.dtpHoraInicio.Size = new System.Drawing.Size(200, 22);
@@ -165,6 +165,7 @@
             // 
             // dtpHoraFin
             // 
+            this.dtpHoraFin.CustomFormat = "hh:mm tt";
             this.dtpHoraFin.Location = new System.Drawing.Point(457, 174);
             this.dtpHoraFin.Name = "dtpHoraFin";
             this.dtpHoraFin.Size = new System.Drawing.Size(200, 22);

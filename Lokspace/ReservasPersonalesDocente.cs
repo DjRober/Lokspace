@@ -86,12 +86,12 @@ namespace Lokspace
                 {
                     DialogResult result = MessageBox.Show($"Esta seguro de cancelar la reserva?");
 
-                    if (result == DialogResult.Yes)
+                    if (result == DialogResult.OK)
                     {
                         //llama al servicio para cambiar el estado
                         int idEstadoCancelado = 200; //valor de 200 = id de "cancelada" en la bds
 
-                        if (reservaService.CambiarEstadoReserva(reservaSeleccionada.id_reserva, idEstadoCancelado, this.docente.id_usuario))
+                        if (reservaService.CancelarReservaPorUsuario(reservaSeleccionada.id_reserva, idEstadoCancelado, this.docente.id_usuario))
                         {
                             MessageBox.Show("Reserva cancelada con exito.", "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             CargarReservas(); //nuevamente cargar la lista (datagridview) para actualizar el cambio

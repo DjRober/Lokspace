@@ -24,6 +24,13 @@ namespace Lokspace
 
         private void NuevaReservaDocente_Load(object sender, EventArgs e)
         {
+            //cambiar formato de tiempo de fecha a hora en los dtp HoraInicio y HoraFin
+            dtpHoraInicio.Format = DateTimePickerFormat.Custom;
+            dtpHoraInicio.ShowUpDown = true;
+
+            dtpHoraFin.Format = DateTimePickerFormat.Custom;
+            dtpHoraFin.ShowUpDown = true;
+
             CargarEspacios();
         }
 
@@ -34,9 +41,16 @@ namespace Lokspace
             {
                 List<Espacio> espacios = espacioService.ObtenerTodosEspacios();
 
+                //si la lista de espacios esta vacia muestra una advertancia
+                if (espacios == null || espacios.Count == 0)
+                {
+                    MessageBox.Show("No se encontraron espacios disponibles para reservar", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+
                 cmbEspacio.DataSource = espacios;
-                cmbEspacio.DisplayMember = "nombre_espacio"; //propiedad para mostrar
-                cmbEspacio.ValueMember = "id_espacio";       //propiedad para usar como valor
+                cmbEspacio.DisplayMember = "NombreEspacio"; //propiedad para mostrar
+                cmbEspacio.ValueMember = "IdEspacio";       //propiedad para usar como valor
+
                 cmbEspacio.SelectedIndex = -1; //no selecciona ninguno por defecto
             }
             catch (Exception ex)
@@ -81,8 +95,9 @@ namespace Lokspace
 
         private void btnNuvaReserva_Click(object sender, EventArgs e)
         {
+            int idEspacioSeleccionado;
             //recoleccion y validacion de datps
-            if (cmbEspacio.SelectedValue == null)
+            if (cmbEspacio.SelectedValue == null || !int.TryParse(cmbEspacio.SelectedValue.ToString(), out idEspacioSeleccionado))  
             {
                 MessageBox.Show("Seleccione un espacio", "Error de Validacion", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -111,8 +126,9 @@ namespace Lokspace
                 fecha_reserva = fechaReserva,
                 hora_inicio = horaInicio,
                 hora_fin = horaFin,
+                id_espacio = idEspacioSeleccionado,
                 proposito = txtCampoProposito.Text,
-                fecha_solicitud = DateTime.Now, 
+                fecha_solicitud = DateTime.Now,
                 id_usuario = this.id_docente, //id del docente que hace la reserva
                 id_gestor = null,
                 id_estado_reserva = 100
@@ -135,6 +151,7 @@ namespace Lokspace
                 this.DialogResult = DialogResult.Cancel;
             }
             
+
         }
 
         private void cmbEspacio_SelectedIndexChanged(object sender, EventArgs e)

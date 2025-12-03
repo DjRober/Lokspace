@@ -102,5 +102,17 @@ namespace Lokspace
         {
 
         }
+
+        private void btnCerrarSesion_Click(object sender, EventArgs e)
+        {
+            var result = MessageBox.Show("¿Estás seguro de que deseas cerrar sesión?", "Confirmar cierre de sesión", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                this.Hide();
+                var loginForm = new Login();
+                loginForm.Show();
+            }
+        }
     }
 }

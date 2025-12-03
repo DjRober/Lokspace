@@ -65,7 +65,7 @@
             this.btnNuevaReserva.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.btnNuevaReserva.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.btnNuevaReserva.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnNuevaReserva.Location = new System.Drawing.Point(852, 45);
+            this.btnNuevaReserva.Location = new System.Drawing.Point(752, 57);
             this.btnNuevaReserva.Name = "btnNuevaReserva";
             this.btnNuevaReserva.Size = new System.Drawing.Size(166, 49);
             this.btnNuevaReserva.TabIndex = 11;
@@ -81,7 +81,7 @@
             this.listaReservasDocente.Name = "listaReservasDocente";
             this.listaReservasDocente.RowHeadersWidth = 51;
             this.listaReservasDocente.RowTemplate.Height = 24;
-            this.listaReservasDocente.Size = new System.Drawing.Size(981, 287);
+            this.listaReservasDocente.Size = new System.Drawing.Size(891, 287);
             this.listaReservasDocente.TabIndex = 12;
             this.listaReservasDocente.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.listaReservasDocente_CellContentClick);
             // 
@@ -90,7 +90,7 @@
             this.btnCancelarReserva.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.btnCancelarReserva.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.btnCancelarReserva.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnCancelarReserva.Location = new System.Drawing.Point(852, 464);
+            this.btnCancelarReserva.Location = new System.Drawing.Point(752, 466);
             this.btnCancelarReserva.Name = "btnCancelarReserva";
             this.btnCancelarReserva.Size = new System.Drawing.Size(166, 49);
             this.btnCancelarReserva.TabIndex = 13;
@@ -102,7 +102,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1138, 558);
+            this.ClientSize = new System.Drawing.Size(976, 558);
             this.Controls.Add(this.btnCancelarReserva);
             this.Controls.Add(this.listaReservasDocente);
             this.Controls.Add(this.btnNuevaReserva);

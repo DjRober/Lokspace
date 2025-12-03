@@ -376,5 +376,35 @@ namespace Lokspace
 
             return estados;
         }
+
+
+        //cancelar estado de reserva
+        public bool CancelarReservaPorUsuario(int idReserva, int idEstadoCancelado, int idUsuario)
+        {
+            try
+            {
+                using (MySqlConnection conn = db.GetConnection())
+                {
+                    conn.Open();
+                    //restriccion para que solo el dueño de la reserva la pueda cancelar
+                    string query = @"UPDATE reservas 
+                             SET id_estado_reserva = @estado 
+                             WHERE id_reserva = @idReserva AND id_usuario = @idUsuario";
+
+                    MySqlCommand cmd = new MySqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@estado", idEstadoCancelado);
+                    cmd.Parameters.AddWithValue("@idReserva", idReserva);
+                    cmd.Parameters.AddWithValue("@idUsuario", idUsuario);
+
+                    int filasAfectadas = cmd.ExecuteNonQuery();
+                    return filasAfectadas > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al cancelar reserva: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+        }
     }
 }
