@@ -201,7 +201,7 @@ namespace Lokspace
                     Width = 120,
                     Height = 30,
                     Cursor = Cursors.Hand,
-                    Location = new Point(65, card.Height - 45)
+                    Location = new Point(65, card.Height - 35)
                 };
 
                 btnReservar.FlatAppearance.BorderSize = 0;
@@ -223,7 +223,7 @@ namespace Lokspace
                     ForeColor = Color.Red,
                     Font = new Font("Segoe UI", 10, FontStyle.Bold),
                     AutoSize = true,
-                    Location = new Point(85, card.Height - 40)
+                    Location = new Point(85, card.Height - 35)
                 };
 
                 card.Controls.Add(lblOcupado);

@@ -62,5 +62,11 @@ namespace Lokspace
                 loginForm.Show();
             }
         }
+
+        private void btnMisReservas_1(object sender, EventArgs e)
+        {
+            FormMisReservas frm = new FormMisReservas(usuario.id_usuario);
+            frm.Show();
+        }
     }
 }

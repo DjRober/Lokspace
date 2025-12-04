@@ -30,6 +30,7 @@
         {
             this.panel1 = new System.Windows.Forms.Panel();
             this.BtnCerrarSesion = new System.Windows.Forms.Button();
+            this.btnMisReservas = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // panel1
@@ -46,15 +47,26 @@
             this.BtnCerrarSesion.Name = "BtnCerrarSesion";
             this.BtnCerrarSesion.Size = new System.Drawing.Size(97, 23);
             this.BtnCerrarSesion.TabIndex = 1;
-            this.BtnCerrarSesion.Text = "cerrar sesion";
+            this.BtnCerrarSesion.Text = "Cerrar Sesion";
             this.BtnCerrarSesion.UseVisualStyleBackColor = true;
             this.BtnCerrarSesion.Click += new System.EventHandler(this.BtnCerrarSesion_Click);
+            // 
+            // btnMisReservas
+            // 
+            this.btnMisReservas.Location = new System.Drawing.Point(25, 213);
+            this.btnMisReservas.Name = "btnMisReservas";
+            this.btnMisReservas.Size = new System.Drawing.Size(97, 23);
+            this.btnMisReservas.TabIndex = 2;
+            this.btnMisReservas.Text = "Mis Reservas";
+            this.btnMisReservas.UseVisualStyleBackColor = true;
+            this.btnMisReservas.Click += new System.EventHandler(this.btnMisReservas_1);
             // 
             // MainAlumnoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(917, 483);
+            this.Controls.Add(this.btnMisReservas);
             this.Controls.Add(this.BtnCerrarSesion);
             this.Controls.Add(this.panel1);
             this.Margin = new System.Windows.Forms.Padding(2);
@@ -69,5 +81,6 @@
 
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button BtnCerrarSesion;
+        private System.Windows.Forms.Button btnMisReservas;
     }
 }

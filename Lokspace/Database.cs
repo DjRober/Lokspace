@@ -12,7 +12,7 @@ namespace Lokspace
 
     internal class Database
     {
-        private string connectionString = "server=localhost;port=3305;database=Lokspace;uid=root;pwd=1234;Allow Zero DateTime=True;";
+        private string connectionString = "server=localhost;port=3305;database=Lokspace;uid=root;pwd=;";
         public MySqlConnection GetConnection()
         {
             return new MySqlConnection(connectionString);
