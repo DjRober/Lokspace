@@ -21,5 +21,15 @@ namespace Lokspace
         {
 
         }
+
+        private void SolicitudesPendientesDocente_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridView1_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

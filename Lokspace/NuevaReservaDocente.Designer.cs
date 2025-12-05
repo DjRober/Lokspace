@@ -141,7 +141,7 @@
             this.cmbEspacio.FormattingEnabled = true;
             this.cmbEspacio.Location = new System.Drawing.Point(116, 168);
             this.cmbEspacio.Name = "cmbEspacio";
-            this.cmbEspacio.Size = new System.Drawing.Size(188, 24);
+            this.cmbEspacio.Size = new System.Drawing.Size(200, 24);
             this.cmbEspacio.TabIndex = 17;
             this.cmbEspacio.SelectedIndexChanged += new System.EventHandler(this.cmbEspacio_SelectedIndexChanged);
             // 

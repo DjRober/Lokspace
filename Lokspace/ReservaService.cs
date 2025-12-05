@@ -378,7 +378,7 @@ namespace Lokspace
         }
 
 
-        //cancelar estado de reserva
+        //cancelar reserva
         public bool CancelarReservaPorUsuario(int idReserva, int idEstadoCancelado, int idUsuario)
         {
             try
@@ -387,12 +387,10 @@ namespace Lokspace
                 {
                     conn.Open();
                     //restriccion para que solo el dueño de la reserva la pueda cancelar
-                    string query = @"UPDATE reservas 
-                             SET id_estado_reserva = @estado 
-                             WHERE id_reserva = @idReserva AND id_usuario = @idUsuario";
+                    string query = $@"UPDATE `reservas` SET id_estado_reserva = {idEstadoCancelado} WHERE id_reserva = @idReserva AND id_usuario = @idUsuario";
 
                     MySqlCommand cmd = new MySqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@estado", idEstadoCancelado);
+                    
                     cmd.Parameters.AddWithValue("@idReserva", idReserva);
                     cmd.Parameters.AddWithValue("@idUsuario", idUsuario);
 

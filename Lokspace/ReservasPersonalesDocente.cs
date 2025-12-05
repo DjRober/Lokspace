@@ -44,10 +44,31 @@ namespace Lokspace
                 listaReservasDocente.Columns["id_estado_reserva"].Visible = false;
                 listaReservasDocente.Columns["id_usuario"].Visible = false;
                 listaReservasDocente.Columns["id_gestor"].Visible = false;
+
+                OcultarColumnas("NombreGestor");
+                OcultarColumnas("RolUsuario");
+                OcultarColumnas("NombreUsuario");
+                listaReservasDocente.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Erro al cargar reservas: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void OcultarColumnas(string nombreColumna)
+        {
+            try
+            {
+                //verifica si la columna existe antes de intentar acceder a ella
+                if (listaReservasDocente.Columns.Contains(nombreColumna))
+                {
+                    listaReservasDocente.Columns[nombreColumna].Visible = false;
+                }
+            }
+            catch
+            {
+                //ignorar errores si la columna no existe
             }
         }
 
@@ -84,9 +105,13 @@ namespace Lokspace
 
                 if (reservaSeleccionada != null)
                 {
-                    DialogResult result = MessageBox.Show($"Esta seguro de cancelar la reserva?");
+                    DialogResult result = MessageBox.Show(
+                        $"¿Está seguro de cancelar la reserva seleccionada?",
+                        "Confirmar Cancelación",
+                        MessageBoxButtons.YesNo, 
+                        MessageBoxIcon.Warning);
 
-                    if (result == DialogResult.OK)
+                    if (result == DialogResult.Yes)
                     {
                         //llama al servicio para cambiar el estado
                         int idEstadoCancelado = 200; //valor de 200 = id de "cancelada" en la bds

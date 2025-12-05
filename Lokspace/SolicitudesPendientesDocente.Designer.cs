@@ -30,8 +30,13 @@
         {
             this.label4 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Alumno = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Solicitud = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnAceptar = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.btnRechazar = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -58,18 +63,6 @@
             this.label6.TabIndex = 11;
             this.label6.Text = "Visualiza y administra las solicitudes de los estudiantes";
             // 
-            // dataGridView1
-            // 
-            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(48, 200);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(653, 261);
-            this.dataGridView1.TabIndex = 12;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -80,17 +73,79 @@
             this.label1.TabIndex = 13;
             this.label1.Text = "Solicitudes pendientes";
             // 
+            // dataGridView1
+            // 
+            this.dataGridView1.AllowUserToOrderColumns = true;
+            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ID,
+            this.Alumno,
+            this.Solicitud,
+            this.btnAceptar,
+            this.btnRechazar});
+            this.dataGridView1.Location = new System.Drawing.Point(48, 213);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowHeadersWidth = 51;
+            this.dataGridView1.RowTemplate.Height = 24;
+            this.dataGridView1.Size = new System.Drawing.Size(887, 247);
+            this.dataGridView1.TabIndex = 14;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick_1);
+            // 
+            // ID
+            // 
+            this.ID.HeaderText = "ID";
+            this.ID.MinimumWidth = 6;
+            this.ID.Name = "ID";
+            this.ID.Width = 125;
+            // 
+            // Alumno
+            // 
+            this.Alumno.HeaderText = "Alumno";
+            this.Alumno.MinimumWidth = 6;
+            this.Alumno.Name = "Alumno";
+            this.Alumno.Width = 125;
+            // 
+            // Solicitud
+            // 
+            this.Solicitud.HeaderText = "Solicitud";
+            this.Solicitud.MinimumWidth = 6;
+            this.Solicitud.Name = "Solicitud";
+            this.Solicitud.Width = 125;
+            // 
+            // btnAceptar
+            // 
+            this.btnAceptar.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.btnAceptar.HeaderText = "";
+            this.btnAceptar.MinimumWidth = 6;
+            this.btnAceptar.Name = "btnAceptar";
+            this.btnAceptar.Text = "Aceptar";
+            this.btnAceptar.UseColumnTextForButtonValue = true;
+            this.btnAceptar.Width = 125;
+            // 
+            // btnRechazar
+            // 
+            this.btnRechazar.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.btnRechazar.HeaderText = "";
+            this.btnRechazar.MinimumWidth = 6;
+            this.btnRechazar.Name = "btnRechazar";
+            this.btnRechazar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.btnRechazar.Text = "Rechazar";
+            this.btnRechazar.UseColumnTextForButtonValue = true;
+            this.btnRechazar.Width = 125;
+            // 
             // SolicitudesPendientesDocente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(972, 500);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label4);
             this.Name = "SolicitudesPendientesDocente";
             this.Text = "SolicitudesPendientesDocente";
+            this.Load += new System.EventHandler(this.SolicitudesPendientesDocente_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -101,7 +156,12 @@
 
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Alumno;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Solicitud;
+        private System.Windows.Forms.DataGridViewButtonColumn btnAceptar;
+        private System.Windows.Forms.DataGridViewButtonColumn btnRechazar;
     }
 }
